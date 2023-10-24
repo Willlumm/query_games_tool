@@ -3,5 +3,6 @@ Queries/
 Weekly/
 *.bat
 *.csv
+*.ipynb
 *.txt
 *.xlsx
