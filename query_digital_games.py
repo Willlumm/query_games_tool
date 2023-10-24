@@ -52,7 +52,7 @@ for platform, query in queries:
     
     # Show total units by day and platform for user to check.
     check = pd.concat([check, df[[date_field, "PurchaseQuantity"]].groupby(date_field).sum().rename(columns={"PurchaseQuantity": platform})], axis=1)
-    df.to_csv(f"C:/Users/a-wlumme/Desktop/GSD Digital Games Upload/Weekly/{platform}_{start}_to_{end}.txt", index=False, sep="\t")
+    df.to_csv(f"./Weekly/{platform}_{start}_to_{end}.txt", index=False, sep="\t")
 
 print()
 print(check)
