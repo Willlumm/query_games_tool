@@ -12,7 +12,7 @@ PATH = os.path.abspath(os.path.dirname(__file__))
 
 # Connect to SQL server.
 print("Connecting to SQL server...")
-params = urllib.parse.quote_plus("Driver={ODBC Driver 17 for SQL Server};Server=AZPCDDARPTSQL05;Database=Xbox;Trusted_Connection=yes;")
+params = urllib.parse.quote_plus("Connection string")
 engine = db.create_engine(f"mssql+pyodbc:///?odbc_connect={params}")
 
 # Get start and end date of previous week.
