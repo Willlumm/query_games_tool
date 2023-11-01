@@ -3,9 +3,12 @@
 # William Lumme
 
 from datetime import date, timedelta
+import os
 import pandas as pd
 import sqlalchemy as db
 import urllib
+
+PATH = os.path.abspath(os.path.dirname(__file__))
 
 # Connect to SQL server.
 print("Connecting to SQL server...")
@@ -36,7 +39,7 @@ for platform, query in queries:
         date_field = "SalesDate"
 
         # Check for new Steam titles and prompt to label as bethesda.
-        pub_df = pd.read_csv("title_publisher.csv")
+        pub_df = pd.read_csv(f"{PATH}\\title_publisher.csv")
         df = df.merge(right=pub_df, how="left", on="TitleName")
         new_titles = df[df.Publisher.isna()][["TitleName", "ProductTitle", "SteamProductId"]].apply(tuple, axis=1).unique()
         print(f"\n{len(new_titles)} new titles")
@@ -52,7 +55,7 @@ for platform, query in queries:
     
     # Show total units by day and platform for user to check.
     check = pd.concat([check, df[[date_field, "PurchaseQuantity"]].groupby(date_field).sum().rename(columns={"PurchaseQuantity": platform})], axis=1)
-    df.to_csv(f"./Weekly/{platform}_{start}_to_{end}.txt", index=False, sep="\t")
+    df.to_csv(f"{PATH}\\Weekly\\{platform}_{start}_to_{end}.txt", index=False, sep="\t")
 
 print()
 print(check)
